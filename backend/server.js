@@ -12,7 +12,7 @@ import {app, server} from "./middlewares/socket.js";
 
 
 
-const PORT = process.env.PORT || 1113
+const PORT = process.env.PORT || 1114
 
 
 dotenv.config()
@@ -20,7 +20,7 @@ dotenv.config()
 
 connectCloudinary()
 app.use(cors({
-    origin: 'http://localhost:2020',
+    origin: 'http://localhost:2022',
     credentials: true
 }))
 app.use(express.json())
