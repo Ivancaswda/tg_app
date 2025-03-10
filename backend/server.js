@@ -9,11 +9,11 @@ import messageRouter from "./routes/messageRouter.js";
 import {app, server} from "./middlewares/socket.js";
 ////////////////////////////////////////
 
-import path from 'path'
+
 
 
 const PORT = process.env.PORT || 1113
-const __dirname = path.resolve()
+
 
 dotenv.config()
 
@@ -29,14 +29,7 @@ app.use('/api/user', userRouter)
 app.use('/api/message', messageRouter)
 app.get('/', (request, response) => response.send('Api работает'))
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../frontend/dist')))
 
-    app.get("*", (request, response) => {
-        response.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"))
-    })
-
-}
 
 
 server.listen( PORT,async () => {
