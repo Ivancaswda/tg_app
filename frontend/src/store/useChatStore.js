@@ -8,6 +8,7 @@ import {useAuthStore} from "./useAuthStore.js";
 export const useChatStore = create((setState, getState) => ({
     messages: [],
     users: [],
+    unreadMessages: {},
     selectedUser: null,
     isUsersLoading: false,
     isMessagesLoading: false,
@@ -44,7 +45,12 @@ export const useChatStore = create((setState, getState) => ({
             const response = await axiosInstance.get( `/message/get/${userId}`)
             if (response.data.success) {
                 console.log(response.data)
-                setState({messages: response.data.messages})
+
+                // making to display unread messages of the chat and its dissappearence after watching it
+                setState((state) => ({
+                    messages: response.data.messages,
+                    unreadMessages: { ...state.unreadMessages, [userId]: 0 },
+                }))
             } else {
                 setState({messages: []})
                 toast.error(response.data.messages)
@@ -82,7 +88,18 @@ export const useChatStore = create((setState, getState) => ({
           if (isMessageSentFromSelectedUser) {
               return;
           }
-          setState({messages: [...getState().messages, newMessage],
+          setState((state) => {
+              // making to display unread messages of the chat and its dissappearence after watching it
+            const isChatOpen = state.selectedUser?._id === newMessage.senderId // if chat open`s
+            const newUnreadMessages = {...state.unreadMessages}
+                // anulling unread messages
+              if (!isChatOpen) {
+                  newUnreadMessages[newMessage.senderId] = (newUnreadMessages[newMessage.senderId] || 0) + 1
+              }
+            return {
+                  messages: isChatOpen ? [...state.messages, newMessage] : state.messages,
+                  unreadMessages: newUnreadMessages
+            }
           })
       })
 
@@ -91,6 +108,9 @@ export const useChatStore = create((setState, getState) => ({
         const socket = useAuthStore.getState().socket;
         socket.off('newMessage')
     },
-    setSelectedUser: (selectedUser) => setState({selectedUser}),
+    setSelectedUser: (selectedUser) => setState((state) => ({
+        selectedUser,
+        unreadMessages: { ...state.unreadMessages, [selectedUser._id]: 0 },
+    })),
     setShowProfile: (showProfile) => setState({showProfile})
 }))

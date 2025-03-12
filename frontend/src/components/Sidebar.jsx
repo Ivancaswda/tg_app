@@ -10,7 +10,7 @@ const Sidebar = ({profileData, setProfileData}) => {
     const [openBurger, setOpenBurger] = useState(false)
 
     const [inputValue, setInputValue] = useState('')
-    const {getUsers, users, selectedUser, isUsersLoading, setSelectedUser} = useChatStore()
+    const {getUsers, users, selectedUser, isUsersLoading, setSelectedUser, unreadMessages} = useChatStore()
     const {theme} = useThemeStore()
     const {onlineUsers} = useAuthStore();
     // filtering online users by toggle
@@ -18,6 +18,7 @@ const Sidebar = ({profileData, setProfileData}) => {
     useEffect(() => {
         getUsers()
         console.log(users)
+        console.log(unreadMessages)
     }, [getUsers])
 
 // VERSATILE FILTRATION
@@ -95,7 +96,9 @@ const Sidebar = ({profileData, setProfileData}) => {
                                 </div>
                             </div>
                             <div>
-
+                                {unreadMessages[user._id] > 0 &&  (
+                                    <span className='px-3 text-white py-1  bg-blue-500 rounded-3xl '>{unreadMessages[user._id]}</span>
+                                )}
                             </div>
 
                         </button>

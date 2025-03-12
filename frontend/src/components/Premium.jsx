@@ -58,9 +58,7 @@ const Premium = ({closedPremModal, setClosedPremModal}) => {
                              src="https://web.telegram.org/a/PremiumLogo.a5c0e88cd478f4d76d82.svg"
                              alt=""/>
                         <h1>Telegram Premium</h1>
-                        <p className='text-center text-sm'>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Error possimus quaerat sed totam. Eius,
-                            praesentium?</p>
+                        <p className='text-center text-sm'>Иди за <b>пределы границ</b>  и открой дюжины <b>эксклюзивных способностей</b> с помощью <span className='text-purple-700 font-semibold'>Telegram Premium</span></p>
                     </div>
                 </div>
 
@@ -107,7 +105,7 @@ const Premium = ({closedPremModal, setClosedPremModal}) => {
                     <button onClick={handlePaymentPremium} disabled={!selectedPlan}
                         className="relative  text-white font-semibold py-2  px-3 rounded-xl bg-green-500 border-[3px] border-transparent overflow-hidden">
                         <span
-                            className="z-10 relative text-lg text-center bottom-0">{selectedPlan ? `Subcribe for RUB ${selectedPlan?.price} per month` : 'Выбери вариант подписки'}</span>
+                            className="z-10 relative text-lg text-center bottom-0">{selectedPlan ? `ПОДПИСАТЬСЯ ЗА  ${selectedPlan?.price} РУБ В МЕСЯЦ ` : 'Выбери вариант подписки'}</span>
 
                         <div
                             className="absolute inset-0 rounded-lg bg-gradient-to-l from-violet-400 via-blue-400 to-pink-400 animate-border"></div>

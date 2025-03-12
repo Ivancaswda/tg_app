@@ -115,7 +115,7 @@ const Profile = ({closedPremModal, setClosedPremModal}) => {
 
 
                     <div className='relative picture w-[100%] h-[100%]'>
-                        <img src={imageProfilePic || authUser?.profilePic || !authImage?.profilePic || green_icon}
+                        <img src={imageProfilePic || authUser?.profilePic || authImage?.profilePic || green_icon}
                              alt="Профиль"
                              className='size-32   w-full h-full   object-cover border-4 '
                         />

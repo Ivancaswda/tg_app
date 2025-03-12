@@ -164,7 +164,7 @@ export const useAuthStore = create((setState, getState) => ({
             return;
         }
 
-        const socket = io('http://localhost:1113', {
+        const socket = io('http://localhost:1120', {
             query: {
                 userId: authUser._id
             }
