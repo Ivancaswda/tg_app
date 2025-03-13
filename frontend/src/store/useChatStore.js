@@ -18,7 +18,7 @@ export const useChatStore = create((setState, getState) => ({
         try {
 
 
-            const response = await axiosInstance.get('/message/get-users')
+            const response = await axiosInstance.get('/api/message/get-users')
 
 
 
@@ -42,7 +42,7 @@ export const useChatStore = create((setState, getState) => ({
         try {
             setState({isMessagesLoading: true})
 
-            const response = await axiosInstance.get( `/message/get/${userId}`)
+            const response = await axiosInstance.get( `/api/message/get/${userId}`)
             if (response.data.success) {
                 console.log(response.data)
 
@@ -65,7 +65,7 @@ export const useChatStore = create((setState, getState) => ({
         try {
             const {selectedUser, messages} = getState()
 
-            const response = await axiosInstance.post( `/message/send/${selectedUser._id}`, data)
+            const response = await axiosInstance.post( `/api/message/send/${selectedUser._id}`, data)
 
             if (response.data.success) {
                 setState({messages: [...messages, response.data.newMessage]})

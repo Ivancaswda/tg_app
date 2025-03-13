@@ -20,7 +20,7 @@ export const useAuthStore = create((setState, getState) => ({
     isPayingUp: false,
     checkAuth: async () => {
         try {
-            const response = await axiosInstance.get('/user/check')
+            const response = await axiosInstance.get('/api/user/check')
             console.log(response.data)
             // Проверяем, подключен ли уже сокет
             setState({authUser: response.data})
@@ -39,7 +39,7 @@ export const useAuthStore = create((setState, getState) => ({
     signup: async (data) => {
         setState({isSigningUp: true})
         try {
-            const response = await axiosInstance.post('/user/signup', data)
+            const response = await axiosInstance.post('/api/user/signup', data)
 
             if (response.data.success) {
                 toast.success('Вы успешно зарегистрированы!')
@@ -58,7 +58,7 @@ export const useAuthStore = create((setState, getState) => ({
     login: async (data) => {
         try {
             setState({isLogining:true})
-            const response = await axiosInstance.post('/user/login', data)
+            const response = await axiosInstance.post('/api/user/login', data)
 
             if (response.data.success) {
                 toast.success('Вы успешно авторизовались')
@@ -75,7 +75,7 @@ export const useAuthStore = create((setState, getState) => ({
     },
     logout: async () => {
         try {
-            const response = await axiosInstance.post( '/user/logout')
+            const response = await axiosInstance.post( '/api/user/logout')
             setState({authUser:false})
             if (response.data.success) {
                 toast.success('Вы успешно вышли из аккаунта')
@@ -91,7 +91,7 @@ export const useAuthStore = create((setState, getState) => ({
         try {
             setState({isUpdatingProfile: true})
             console.log(data)
-            const response = await axiosInstance.post( '/user/update-profile', data)
+            const response = await axiosInstance.post( '/api/user/update-profile', data)
 
             if (response.data.success) {
                 toast.success('Профиль успешно обновлён')
@@ -107,7 +107,7 @@ export const useAuthStore = create((setState, getState) => ({
         try {
             setState({isUpdatingImage: true})
             console.log(data)
-            const response = await axiosInstance.put('/user/update-image', data)
+            const response = await axiosInstance.put('/api/user/update-image', data)
             if (response.data.success) {
                 toast.success('Аватар успешно обновлён')
                 setState({authImage: response.data.user})
@@ -125,7 +125,7 @@ export const useAuthStore = create((setState, getState) => ({
     premiumPayment: async (purchaseData) => {
         try {
             setState({isPayingUp: true})
-            const response = await axiosInstance.post('/user/premium-payment', purchaseData)
+            const response = await axiosInstance.post('/api/user/premium-payment', purchaseData)
 
             const data = response.data
             window.location.href = data.url
@@ -140,7 +140,7 @@ export const useAuthStore = create((setState, getState) => ({
      verifyPayment: async (data) => {
 
         try {
-            const response = await axiosInstance.post( '/user/verify-payment', data )
+            const response = await axiosInstance.post( '/api/user/verify-payment', data )
 
             if (response.data.success) {
 
@@ -164,7 +164,7 @@ export const useAuthStore = create((setState, getState) => ({
             return;
         }
 
-        const socket = io('http://localhost:1120', {
+        const socket = io(import.meta.env.MODE === "development" ? "http://localhost:1120/" : '/', {
             query: {
                 userId: authUser._id
             }
