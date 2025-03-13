@@ -133,7 +133,8 @@ const Profile = ({closedPremModal, setClosedPremModal}) => {
 
                         <h1 style={{textShadow: '4px 4px 4px black'}}
                             className='font-semibold text-white flex items-center gap-2  '>{authUser?.fullName}{authUser?.isPremium &&
-                            <img className='w-4' src="https://web.telegram.org/a/PremiumLogo.a5c0e88cd478f4d76d82.svg" alt=""/>}</h1>
+                            <img  className='w-4' src="https://web.telegram.org/a/PremiumLogo.a5c0e88cd478f4d76d82.svg" alt=""/>}</h1>
+                            <p className='text-white'>{authUser?.premiumTariff}</p>
                         <p className={`text-xs font-semibold ${onlineUsers.includes(authUser._id) ? 'text-green-500' : 'text-gray-500'} `}>{onlineUsers.includes(authUser._id) ? 'В сети' : 'Не в сети'}</p>
                     </div>
                 </div>
@@ -252,7 +253,11 @@ const Profile = ({closedPremModal, setClosedPremModal}) => {
                 </div>
 
                 <div onClick={() => {
-                    setClosedPremModal(false)
+                    if (!authUser?.isPremium) {
+                        setClosedPremModal(false)
+                    } else {
+                        return toast.error('У вас уже есть Telegram Premium')
+                    }
                 }} className='flex items-center py-3 hover:bg-gray-100 cursor-pointer  '>
 
 

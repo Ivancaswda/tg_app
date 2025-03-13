@@ -7,7 +7,7 @@ import {useAuthStore} from "../store/useAuthStore.js";
 
     const backendUrl = 'http://localhost:1113'
 const Verify = () => {
-
+    const {selectedPlan, setSelectedPlan} = useAuthStore()
     const [searchParams, setSearchParams] = useSearchParams()
     const success = searchParams.get('success')
     const userId = searchParams.get('userId')
@@ -18,7 +18,8 @@ const Verify = () => {
 
 
     useEffect( () => {
-      verifyPayment({success, userId})
+        console.log(selectedPlan?.name)
+      verifyPayment({success, userId, name: selectedPlan?.name})
         navigate('/')
     }, [])
 

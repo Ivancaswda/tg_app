@@ -4,7 +4,7 @@ import {useAuthStore} from "../store/useAuthStore.js";
 import axios from "axios";
 
 const Premium = ({closedPremModal, setClosedPremModal}) => {
-    const [selectedPlan, setSelectedPlan] = useState(null)
+    const {selectedPlan, setSelectedPlan} = useAuthStore()
     const {premiumPayment, authUser} = useAuthStore()
     const premiumSubscribtions = [
         {

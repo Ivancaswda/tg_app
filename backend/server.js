@@ -17,7 +17,7 @@ dotenv.config()
 const __dirname = path.resolve()
 connectCloudinary()
 app.use(cors({
-    origin: ['http://localhost:2020'], // Укажи конкретный фронтенд-URL
+    origin: ['http://localhost:2021'], // Укажи конкретный фронтенд-URL
     credentials: true // Включает поддержку кук и заголовков авторизации))
 }))
 

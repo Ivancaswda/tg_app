@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
     password: {type:String, required:true, minLength: 6},
     profilePic: {type:String, default: ""},
     description: {type:String, default: 'Не указано'},
-    isPremium: {type:Boolean, default:false}
+    isPremium: {type:Boolean, default:false},
+    premiumTariff: {type: String, default: null}
 }, {timestamps: true})
 
 const userModel = mongoose.models.user || mongoose.model('user', userSchema)

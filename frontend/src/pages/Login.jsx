@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Eye, EyeOff, Lock, Mail, User} from "lucide-react";
+import {Eye, EyeOff, Loader, Lock, Mail, User} from "lucide-react";
 import {NavLink, useNavigate} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import {useAuthStore} from "../store/useAuthStore.js";
@@ -8,7 +8,7 @@ const Login = () => {
 
     const navigate = useNavigate()
 
-    const {login} = useAuthStore()
+    const {login, isLogining} = useAuthStore()
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -43,6 +43,12 @@ const Login = () => {
         } catch (error) {
             toast.error('Не удалось зарегистрироваться', error.message)
         }
+    }
+
+    if (isLogining) {
+        return <div className='h-[100vh] w-full flex items-center justify-center'>
+            <Loader  className='size-10 animate-spin text-blue-500'/>
+        </div>
     }
 
     return (

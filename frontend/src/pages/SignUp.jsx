@@ -50,7 +50,7 @@ const SignUp = () => {
     }
 
     if (isSigningUp) {
-        return <div className='h-[100vh] flex items-center justify-center'>
+        return <div className='h-[100vh] w-full flex items-center justify-center'>
             <Loader  className='size-10 animate-spin text-blue-500'/>
         </div>
     }

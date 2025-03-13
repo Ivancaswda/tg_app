@@ -22,8 +22,8 @@ const stripePayment = async (request, response) => {
                 },
             ],
             mode: "payment",
-            success_url: `https://tg-puce-six/verify?success=true&userId=${userId}`,
-            cancel_url: `https://tg-puce-six/verify?success=false&userId=${userId}`,
+            success_url: `http://localhost:2021/verify?success=true&userId=${userId}`,
+            cancel_url: `http://localhost:2021/verify?success=false&userId=${userId}`,
         });
 
         response.json({ success:true,url:session.url})
@@ -33,10 +33,10 @@ const stripePayment = async (request, response) => {
 }
 
 const verifyStripe = async (request, response) => {
-    const {userId, success} = request.body
+    const {userId, success, name} = request.body
     try {
         if (success === "true") {
-            await userModel.findByIdAndUpdate(userId, {isPremium:true})
+            await userModel.findByIdAndUpdate(userId, {isPremium:true,premiumTariff:name })
 
             response.json({success:true})
         } {
