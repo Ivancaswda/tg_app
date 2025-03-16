@@ -33,7 +33,6 @@ app.use(cookieParser())
 app.use('/api/user', userRouter)
 app.use('/api/message', messageRouter)
 app.use('/api/status', statusRouter)
-app.get('/', (request, response) => response.send('Api работает'))
 
 if (process.env.NODE_ENV=== "production") {
     app.use(express.static(path.join(__dirname, "../frontend/dist")))

@@ -165,7 +165,7 @@ export const useAuthStore = create((setState, getState) => ({
             return;
         }
 
-        const socket = io(import.meta.env.MODE === "development" ? "http://localhost:1120/" : '/', {
+        const socket = io(import.meta.env.NODE_ENV === "development" ? "http://localhost:1120/" : '/', {
             query: {
                 userId: authUser._id
             }
