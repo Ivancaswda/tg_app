@@ -48,7 +48,7 @@ const App = () => {
 
                  <div  className='w-full min-h-screen flex overflow-x-hidden  '>
                   <Routes>
-                      <Route path='/' element={!authUser ? <SignUp/> : <MainPage closedPremModal={closedPremModal} setClosedPremModal={setClosedPremModal} />}/>
+                          <Route path='/' element={authUser ? <MainPage closedPremModal={closedPremModal} setClosedPremModal={setClosedPremModal} /> : <Navigate to='login'/>}/>
                       <Route path='/signup' element={!authUser ?<SignUp/> : <Navigate to='/'/>}/>
 
                       <Route path='/login' element={!authUser ? <Login/> : <Navigate to='/'/>}/>
