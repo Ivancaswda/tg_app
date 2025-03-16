@@ -112,5 +112,6 @@ export const useChatStore = create((setState, getState) => ({
         selectedUser,
         unreadMessages: { ...state.unreadMessages, [selectedUser._id]: 0 },
     })),
-    setShowProfile: (showProfile) => setState({showProfile})
+    setShowProfile: (showProfile) => setState({showProfile}),
+
 }))

@@ -7,7 +7,7 @@ const server = http.createServer(app)
 
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:2021"],
+        origin: ["http://localhost:2020"],
         methods: ["GET", "POST"],
         credentials: true
     }

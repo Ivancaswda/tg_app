@@ -11,11 +11,18 @@ import Login from "./pages/Login.jsx";
 import PremiumModal from "./components/PremiumModal.jsx";
 import Premium from "./components/Premium.jsx";
 import Verify from "./pages/Verify.jsx";
+import StatusModal from "./components/StatusModal.jsx";
+import CreateStatus from "./components/CreateStatus.jsx";
+import {useStatusStore} from "./store/useStatusStore.js";
+
+import SeeAndRateStatus from "./pages/SeeAndRateStatus.jsx";
 
 
 
 const App = () => {
     const [closedPremModal, setClosedPremModal] = useState(true)
+    const [closedStatusModal, setClosedStatusModal] = useState(false)
+    const {createStatus, setCreateStatus} = useStatusStore()
     const {authUser, checkAuth, isCheckingAuth, onlineUsers} = useAuthStore()
     const {theme} = useThemeStore()
     console.log(onlineUsers)
@@ -46,11 +53,17 @@ const App = () => {
 
                       <Route path='/login' element={!authUser ? <Login/> : <Navigate to='/'/>}/>
                       <Route path='/verify' element={<Verify/>}/>
-
+                      <Route path='/see/:id' element={<SeeAndRateStatus/>}/>
                   </Routes>
                      {!closedPremModal && <PremiumModal closedPremModal={closedPremModal} setClosedPremModal={setClosedPremModal}>
                          <Premium closedPremModal={closedPremModal} setClosedPremModal={setClosedPremModal}/>
                      </PremiumModal>}
+
+                     {createStatus && <StatusModal closedStatusModal={closedStatusModal} setClosedStatusModal={setClosedStatusModal} >
+                         <CreateStatus/>
+                     </StatusModal>}
+
+
 
 
 

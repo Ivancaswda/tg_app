@@ -7,8 +7,10 @@ import connectCloudinary from "./middlewares/cloudinary.js";
 import userRouter from "./routes/userRoute.js";
 import messageRouter from "./routes/messageRouter.js";
 import {app, server} from "./middlewares/socket.js";
-////////////////////////////////////////
 import path from 'path'
+import statusRouter from "./routes/statusRoute.js";
+////////////////////////////////////////
+
 
 
 
@@ -17,8 +19,8 @@ dotenv.config()
 const __dirname = path.resolve()
 connectCloudinary()
 app.use(cors({
-    origin: ['http://localhost:2021'], // Укажи конкретный фронтенд-URL
-    credentials: true // Включает поддержку кук и заголовков авторизации))
+    origin: ['http://localhost:2020'], //  фронтенд-URL
+    credentials: true
 }))
 
 
@@ -30,6 +32,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use('/api/user', userRouter)
 app.use('/api/message', messageRouter)
+app.use('/api/status', statusRouter)
 app.get('/', (request, response) => response.send('Api работает'))
 
 if (process.env.NODE_ENV=== "production") {

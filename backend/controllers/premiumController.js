@@ -22,8 +22,8 @@ const stripePayment = async (request, response) => {
                 },
             ],
             mode: "payment",
-            success_url: `http://localhost:2021/verify?success=true&userId=${userId}`,
-            cancel_url: `http://localhost:2021/verify?success=false&userId=${userId}`,
+            success_url: `http://localhost:2020/verify?success=true&userId=${userId}`,
+            cancel_url: `http://localhost:2020/verify?success=false&userId=${userId}`,
         });
 
         response.json({ success:true,url:session.url})

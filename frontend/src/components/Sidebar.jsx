@@ -4,6 +4,7 @@ import {useChatStore} from "../store/useChatStore.js";
 import {useAuthStore} from "../store/useAuthStore.js";
 import {Users} from "lucide-react";
 import {useThemeStore} from "../store/useThemeStore.js";
+import StatusContainer from "./StatusContainer.jsx";
 
 
 const Sidebar = ({profileData, setProfileData}) => {
@@ -50,6 +51,7 @@ const Sidebar = ({profileData, setProfileData}) => {
 
         <div  className={` fixed top-0 left-0 h-screen w-[100%] sm:w-[44%] md:w-[34%] lg:w-[26%] border-r border-base-300  flex flex-col  `}>
             <Navbar profileData={profileData} setProfileData={setProfileData} openBurger={openBurger} setOpenBurger={setOpenBurger} inputValue={inputValue} setInputValue={setInputValue}/>
+            <StatusContainer/>
             <aside
                 className={`   h-full w-full  border-r overflow-y-auto border-base-300 flex-col transition-all duration-200`}>
                 <div className='border-b border-base-300 w-full p-5'>

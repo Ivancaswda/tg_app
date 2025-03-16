@@ -5,7 +5,9 @@ import ChatHeader from "./ChatHeader.jsx";
 import {Loader} from "lucide-react";
 import MessageInput from "./MessageInput.jsx";
 import {useLocation} from "react-router-dom";
-
+import emoji from 'react-emoji'
+import StatusContainer from "./StatusContainer.jsx";
+import {useStatusStore} from "../store/useStatusStore.js";
 
 const ChatContainer = () => {
 
@@ -14,6 +16,7 @@ const ChatContainer = () => {
     const [userDown, setUserDown] = useState(false)
     const [chooseTheme, setChooseTheme] = useState(false)
     const messageEndRef = useRef(null)
+    const {showPicker, setShowPicker} = useStatusStore()
     const location = useLocation()
     useEffect(() => {
             console.log(selectedUser._id)
@@ -49,6 +52,7 @@ const ChatContainer = () => {
             </div>
         );
     };
+
     const getSelectedUserAvatar = (user) => {
         if (user.profilePic) {
             return <img src={user.profilePic} className='object-cover w-full h-full' alt="Avatar" />;
@@ -65,9 +69,18 @@ const ChatContainer = () => {
     return (
         <div  className=' w-full sm:flex-1  flex flex-col overflow-auto'>
             <ChatHeader userDown={userDown} setUserDown={setUserDown} chooseTheme={chooseTheme} setChooseTheme={setChooseTheme}/>
+
+            {/* Status section */}
+
+
+
+
+
+
             <div  onClick={() => {
                 setChooseTheme(false)
                 setUserDown(false)
+                setShowPicker(false)
             }} className='w-full sm:flex-1 overflow-y-auto p-4 space-y-4 mb-20'>
                 {messages?.length > 0 ? (
                     messages.map((message, index) => (
@@ -91,7 +104,7 @@ const ChatContainer = () => {
                                 {message.image && (
                                     <img src={message.image} className='sm:max-w-[200px] rounded-md mb-2' alt=""/>
                                 )}
-                                {message.text && <p>{message.text}</p>}
+                                {message.text && <p>{emoji.emojify(message.text)}</p>}
                             </div>
                         </div>
                     ))
