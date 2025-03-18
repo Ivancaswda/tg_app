@@ -108,8 +108,7 @@ export const useChatStore = create((setState, getState) => ({
         socket.off('newMessage')
     },
     setSelectedUser: (selectedUser) => setState((state) => ({
-        selectedUser,
-        unreadMessages: { ...state.unreadMessages, [selectedUser._id]: 0 },
+        selectedUser
     })),
     setShowProfile: (showProfile) => setState({showProfile}),
 
