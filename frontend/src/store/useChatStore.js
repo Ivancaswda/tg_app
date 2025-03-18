@@ -9,8 +9,6 @@ export const useChatStore = create((setState, getState) => ({
     messages: [],
     users: [],
     unreadMessages: {},
-        showUser: null,
-    setShowUser: (showUser) => setState({showUser}),
     isUsersLoading: false,
     isMessagesLoading: false,
     showProfile: false,
