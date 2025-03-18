@@ -97,7 +97,10 @@ const SeeAndRateStatus = () => {
                 <div className='flex items-center gap-2 justify-center mt-6 '>
                     <img className='w-12 h-12 p-2 bg-blue-300 rounded-full
                     ' src={status?.userId?.profilePic || green_icon} alt=""/>
-                    <p className='font-semibold text-gray-600'>{status?.userId?.fullName}</p>
+                    <p className='font-semibold text-gray-600 flex items-center gap-2'>{status?.userId?.fullName}
+                        {authUser?.isPremium &&
+                            <img  className='w-4' src="https://web.telegram.org/a/PremiumLogo.a5c0e88cd478f4d76d82.svg" alt=""/>}
+                    </p>
                 </div>
                 <div className='mt-6'>
                     <p className='text-xs font-semibold text-gray-700 text-center mb-2 flex justify-center gap-1'>
